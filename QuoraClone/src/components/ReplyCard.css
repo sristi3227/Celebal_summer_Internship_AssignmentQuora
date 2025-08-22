@@ -1,0 +1,398 @@
+.reply-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.reply-card.level-0 {
+  margin-left: 0;
+}
+
+.reply-card.level-1 {
+  margin-left: 20px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.reply-card.level-2 {
+  margin-left: 40px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+.reply-card.level-3 {
+  margin-left: 60px;
+  border-left: 3px solid var(--success-color);
+}
+
+.reply-content {
+  padding: 16px;
+}
+
+.reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.author-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.author-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.reply-date {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.reply-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.delete-reply-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.delete-reply-btn:hover {
+  background: var(--error-color);
+  color: white;
+  opacity: 1;
+}
+
+.delete-reply-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.delete-reply-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.reply-text {
+  margin-bottom: 12px;
+}
+
+.reply-text p {
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 14px;
+  margin: 0;
+}
+
+.reply-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+}
+
+.reply-btn,
+.toggle-replies-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.reply-btn:hover,
+.toggle-replies-btn:hover {
+  background: var(--border-color);
+  color: var(--text-primary);
+}
+
+.reply-btn svg,
+.toggle-replies-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.reply-form {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+.reply-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background: var(--background-color);
+  color: var(--text-primary);
+  min-height: 60px;
+}
+
+.reply-textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(185, 43, 39, 0.1);
+}
+
+.reply-form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.char-count {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.cancel-btn:hover {
+  background: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.submit-btn {
+  background: var(--primary-color);
+  color: white;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.submit-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.nested-replies {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Delete Confirmation Modal */
+.delete-confirmation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.delete-modal {
+  background: var(--surface-color);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.2s ease;
+}
+
+.delete-modal h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.delete-modal p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.delete-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancel-delete-btn,
+.confirm-delete-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-delete-btn {
+  background: var(--border-color);
+  color: var(--text-secondary);
+}
+
+.cancel-delete-btn:hover:not(:disabled) {
+  background: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.confirm-delete-btn {
+  background: var(--error-color);
+  color: white;
+}
+
+.confirm-delete-btn:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.cancel-delete-btn:disabled,
+.confirm-delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .reply-card.level-1 {
+    margin-left: 15px;
+  }
+
+  .reply-card.level-2 {
+    margin-left: 30px;
+  }
+
+  .reply-card.level-3 {
+    margin-left: 45px;
+  }
+
+  .reply-content {
+    padding: 12px;
+  }
+
+  .author-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .reply-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .reply-form-actions {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .form-buttons {
+    justify-content: flex-end;
+  }
+
+  .delete-modal {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .delete-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cancel-delete-btn,
+  .confirm-delete-btn {
+    width: 100%;
+  }
+}

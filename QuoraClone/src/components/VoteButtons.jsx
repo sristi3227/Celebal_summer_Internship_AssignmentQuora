@@ -16,6 +16,12 @@ function VoteButtons({ itemId, itemType, initialUpvotes, initialDownvotes, compa
   useEffect(() => {
     const checkUserVote = async () => {
       try {
+        // Handle replies stored as nested data differently
+        if (itemType === "replies" && typeof itemId === "string" && itemId.includes("-")) {
+          // This is a nested reply, skip vote checking for now
+          return
+        }
+
         const docRef = doc(db, itemType, itemId)
         const docSnap = await getDoc(docRef)
 
@@ -40,6 +46,12 @@ function VoteButtons({ itemId, itemType, initialUpvotes, initialDownvotes, compa
 
   const handleVote = async (voteType) => {
     if (!currentUser || loading) return
+
+    // Skip voting on nested replies for now (they use generated IDs)
+    if (itemType === "replies" && typeof itemId === "string" && itemId.includes("-")) {
+      console.log("Voting on nested replies not yet implemented")
+      return
+    }
 
     setLoading(true)
     try {
