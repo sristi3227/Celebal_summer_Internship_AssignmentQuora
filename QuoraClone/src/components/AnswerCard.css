@@ -164,10 +164,24 @@
 .replies-loading {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  padding: 20px;
+  padding: 40px 20px;
   color: var(--text-secondary);
   font-size: 14px;
+  text-align: center;
+}
+
+.replies-loading .spinner {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+  margin-right: 8px;
+}
+
+.replies-loading .loading-text {
+  margin-top: 0;
+  margin-left: 0;
 }
 
 .loading-spinner {
@@ -177,6 +191,7 @@
   border-top: 2px solid var(--primary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  flex-shrink: 0;
 }
 
 @keyframes spin {
@@ -189,7 +204,7 @@
 }
 
 .no-replies {
-  padding: 20px;
+  padding: 30px 20px;
   text-align: center;
   color: var(--text-muted);
   font-style: italic;
@@ -235,5 +250,14 @@
 
   .form-buttons {
     justify-content: flex-end;
+  }
+
+  .replies-loading {
+    padding: 30px 15px;
+  }
+
+  .loading-spinner {
+    width: 18px;
+    height: 18px;
   }
 }

@@ -322,6 +322,18 @@
   cursor: not-allowed;
 }
 
+/* Button loading spinner */
+.btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 6px;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -339,6 +351,15 @@
   to {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
