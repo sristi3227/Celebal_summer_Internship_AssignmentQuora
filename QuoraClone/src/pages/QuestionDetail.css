@@ -1,11 +1,13 @@
 .question-detail {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  background-color: var(--bg-color);
+  min-height: 100vh;
 }
 
 .question-container {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -14,8 +16,8 @@
 .question-header {
   display: flex;
   gap: 20px;
-  padding: 30px;
-  border-bottom: 1px solid #e1e5e9;
+  padding: 24px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .question-votes {
@@ -28,9 +30,9 @@
 
 .question-content h1 {
   font-size: 28px;
-  margin-bottom: 15px;
-  color: #333;
   font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
   line-height: 1.3;
 }
 
@@ -38,30 +40,70 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .question-body {
-  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 16px;
 }
 
 .question-body p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #333;
+  margin: 0;
+}
+
+.question-actions {
+  margin: 16px 0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.delete-question-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-question-btn:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+.delete-question-btn:active {
+  transform: translateY(0);
+}
+
+.delete-question-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
 }
 
 .question-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 16px;
 }
 
 .tag {
-  background: #e3f2fd;
-  color: #1976d2;
+  background: var(--accent-color);
+  color: white;
   padding: 4px 12px;
   border-radius: 16px;
   font-size: 12px;
@@ -69,98 +111,284 @@
 }
 
 .answers-section {
-  padding: 30px;
+  padding: 24px;
 }
 
 .answers-section h2 {
-  font-size: 24px;
-  margin-bottom: 25px;
-  color: #333;
+  font-size: 20px;
   font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
 }
 
 .answer-form {
-  margin-bottom: 40px;
-  padding: 25px;
-  background: #f8f9fa;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: var(--input-bg);
   border-radius: 8px;
-  border: 1px solid #e1e5e9;
+  border: 1px solid var(--border-color);
 }
 
 .answer-textarea {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e1e5e9;
-  border-radius: 8px;
-  font-size: 16px;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
   font-family: inherit;
+  background: var(--card-bg);
+  color: var(--text-primary);
   resize: vertical;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .answer-textarea:focus {
-  border-color: #b92b27;
-  box-shadow: 0 0 0 3px rgba(185, 43, 39, 0.1);
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
 }
 
 .submit-answer-btn {
-  padding: 10px 20px;
-  background: #b92b27;
+  background: var(--accent-color);
   color: white;
   border: none;
+  padding: 10px 20px;
   border-radius: 6px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
 }
 
 .submit-answer-btn:hover:not(:disabled) {
-  background: #a02622;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
 }
 
 .submit-answer-btn:disabled {
-  background: #ccc;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
 }
 
 .answers-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  font-size: 16px;
+  color: #dc3545;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  margin: 0 0 16px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-content p {
+  margin: 0 0 24px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.delete-btn {
+  padding: 8px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.cancel-btn:disabled,
+.delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Add these styles to ensure comment/reply blocks use theme colors in both modes */
+.comment-section,
+.reply-section,
+.comment-box,
+.reply-box {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  margin-top: 24px;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.comment-input,
+.reply-input,
+.comment-form textarea,
+.comment-form input {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 15px;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.comment-input:focus,
+.reply-input:focus,
+.comment-form textarea:focus,
+.comment-form input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+
+/* If you use a different class for posted comments, add: */
+.posted-comment,
+.posted-reply {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  margin-top: 12px;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .question-detail {
-    padding: 15px;
+    padding: 12px;
   }
 
   .question-header {
     flex-direction: column;
-    padding: 20px;
-    gap: 15px;
+    gap: 16px;
+    padding: 16px;
   }
 
   .question-content h1 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .question-meta {
-    flex-wrap: wrap;
+    font-size: 13px;
   }
 
   .answers-section {
-    padding: 20px;
-  }
-
-  .answers-section h2 {
-    font-size: 20px;
+    padding: 16px;
   }
 
   .answer-form {
+    padding: 16px;
+  }
+
+  .modal-content {
+    margin: 20px;
     padding: 20px;
   }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Dark mode support */
+:root {
+  --bg-color: #ffffff;
+  --card-bg: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --border-color: #e5e5e5;
+  --input-bg: #f8f9fa;
+  --hover-bg: #f8f9fa;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+}
+
+[data-theme="dark"] {
+  --bg-color: #0f0f0f;
+  --card-bg: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --border-color: #333333;
+  --input-bg: #2a2a2a;
+  --hover-bg: #2a2a2a;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
 }
