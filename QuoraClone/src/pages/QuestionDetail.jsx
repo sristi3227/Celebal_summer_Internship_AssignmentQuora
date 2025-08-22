@@ -16,6 +16,7 @@ import {
 } from "firebase/firestore"
 import { db } from "../firebase/config"
 import { useAuth } from "../contexts/AuthContext"
+import { useNotifications } from "../contexts/NotificationContext"
 import AnswerCard from "../components/AnswerCard"
 import VoteButtons from "../components/VoteButtons"
 import "./QuestionDetail.css"
@@ -23,6 +24,7 @@ import "./QuestionDetail.css"
 function QuestionDetail() {
   const { id } = useParams()
   const { currentUser } = useAuth()
+  const { createNotification } = useNotifications()
   const [question, setQuestion] = useState(null)
   const [answers, setAnswers] = useState([])
   const [newAnswer, setNewAnswer] = useState("")
@@ -98,6 +100,20 @@ function QuestionDetail() {
       await updateDoc(doc(db, "questions", id), {
         answerCount: increment(1),
       })
+
+      // Create notification for the question author
+      if (question && question.authorId !== currentUser.uid) {
+        await createNotification({
+          type: "answer",
+          recipientId: question.authorId,
+          senderId: currentUser.uid,
+          senderName: currentUser.displayName || currentUser.email,
+          message: "answered your question",
+          link: `/question/${id}`,
+          entityId: id,
+          entityType: "question",
+        })
+      }
 
       setNewAnswer("")
     } catch (error) {

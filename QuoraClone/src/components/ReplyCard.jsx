@@ -4,11 +4,13 @@ import { useState } from "react"
 import { addDoc, collection, serverTimestamp, doc, deleteDoc } from "firebase/firestore"
 import { db } from "../firebase/config"
 import { useAuth } from "../contexts/AuthContext"
+import { useNotifications } from "../contexts/NotificationContext"
 import VoteButtons from "./VoteButtons"
 import "./ReplyCard.css"
 
 function ReplyCard({ reply, onReplyAdded, level = 0, allReplies = [] }) {
   const { currentUser } = useAuth()
+  const { createNotification } = useNotifications()
   const [showReplyForm, setShowReplyForm] = useState(false)
   const [replyContent, setReplyContent] = useState("")
   const [submitting, setSubmitting] = useState(false)
@@ -59,6 +61,20 @@ function ReplyCard({ reply, onReplyAdded, level = 0, allReplies = [] }) {
 
       const docRef = await addDoc(collection(db, "replies"), newReply)
       console.log("Nested reply created successfully with ID:", docRef.id)
+
+      // Create notification for the reply author
+      if (reply.authorId !== currentUser.uid) {
+        await createNotification({
+          type: "reply",
+          recipientId: reply.authorId,
+          senderId: currentUser.uid,
+          senderName: currentUser.displayName || currentUser.email,
+          message: "replied to your comment",
+          link: `/question/${reply.questionId}`,
+          entityId: reply.id,
+          entityType: "reply",
+        })
+      }
 
       setReplyContent("")
       setShowReplyForm(false)

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../contexts/AuthContext"
 import { useTheme } from "../contexts/ThemeContext"
+import NotificationBell from "./NotificationBell"
 import "./Navbar.css"
 
 function Navbar() {
@@ -75,6 +76,8 @@ function Navbar() {
             </svg>
             Ask Question
           </Link>
+
+          <NotificationBell />
 
           <button onClick={toggleTheme} className="theme-toggle">
             {isDark ? (

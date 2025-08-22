@@ -3,6 +3,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import { AuthProvider, useAuth } from "./contexts/AuthContext"
 import { ThemeProvider } from "./contexts/ThemeContext"
+import { NotificationProvider } from "./contexts/NotificationContext"
 import Navbar from "./components/Navbar"
 import Sidebar from "./components/Sidebar"
 import Home from "./pages/Home"
@@ -59,86 +60,88 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router>
-          <div className="App">
-            <AppLayout>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <ProtectedRoute>
-                      <Home />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <PublicRoute>
-                      <Login />
-                    </PublicRoute>
-                  }
-                />
-                <Route
-                  path="/register"
-                  element={
-                    <PublicRoute>
-                      <Register />
-                    </PublicRoute>
-                  }
-                />
-                <Route
-                  path="/profile/:userId?"
-                  element={
-                    <ProtectedRoute>
-                      <Profile />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/question/:id"
-                  element={
-                    <ProtectedRoute>
-                      <QuestionDetail />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/ask"
-                  element={
-                    <ProtectedRoute>
-                      <AskQuestion />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/search"
-                  element={
-                    <ProtectedRoute>
-                      <Search />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/topics"
-                  element={
-                    <ProtectedRoute>
-                      <Topics />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/following"
-                  element={
-                    <ProtectedRoute>
-                      <Following />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </AppLayout>
-          </div>
-        </Router>
+        <NotificationProvider>
+          <Router>
+            <div className="App">
+              <AppLayout>
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <ProtectedRoute>
+                        <Home />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/login"
+                    element={
+                      <PublicRoute>
+                        <Login />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/register"
+                    element={
+                      <PublicRoute>
+                        <Register />
+                      </PublicRoute>
+                    }
+                  />
+                  <Route
+                    path="/profile/:userId?"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/question/:id"
+                    element={
+                      <ProtectedRoute>
+                        <QuestionDetail />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/ask"
+                    element={
+                      <ProtectedRoute>
+                        <AskQuestion />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/search"
+                    element={
+                      <ProtectedRoute>
+                        <Search />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/topics"
+                    element={
+                      <ProtectedRoute>
+                        <Topics />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    path="/following"
+                    element={
+                      <ProtectedRoute>
+                        <Following />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </AppLayout>
+            </div>
+          </Router>
+        </NotificationProvider>
       </AuthProvider>
     </ThemeProvider>
   )

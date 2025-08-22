@@ -4,12 +4,14 @@ import { useState, useEffect } from "react"
 import { collection, query, where, onSnapshot, addDoc, serverTimestamp } from "firebase/firestore"
 import { db } from "../firebase/config"
 import { useAuth } from "../contexts/AuthContext"
+import { useNotifications } from "../contexts/NotificationContext"
 import VoteButtons from "./VoteButtons"
 import ReplyCard from "./ReplyCard"
 import "./AnswerCard.css"
 
 function AnswerCard({ answer }) {
   const { currentUser } = useAuth()
+  const { createNotification } = useNotifications()
   const [allReplies, setAllReplies] = useState([])
   const [showReplies, setShowReplies] = useState(false)
   const [showReplyForm, setShowReplyForm] = useState(false)
@@ -80,6 +82,20 @@ function AnswerCard({ answer }) {
 
       const docRef = await addDoc(collection(db, "replies"), replyData)
       console.log("Reply created successfully with ID:", docRef.id)
+
+      // Create notification for the answer author
+      if (answer.authorId !== currentUser.uid) {
+        await createNotification({
+          type: "reply",
+          recipientId: answer.authorId,
+          senderId: currentUser.uid,
+          senderName: currentUser.displayName || currentUser.email,
+          message: "replied to your answer",
+          link: `/question/${answer.questionId}`,
+          entityId: answer.id,
+          entityType: "answer",
+        })
+      }
 
       // Clear form and close it
       setReplyContent("")
