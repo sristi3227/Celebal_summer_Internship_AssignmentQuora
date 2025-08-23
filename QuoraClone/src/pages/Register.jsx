@@ -78,7 +78,7 @@ function Register() {
           <div className="auth-header">
             <div className="logo">
               <div className="logo-icon">Q</div>
-              <span className="logo-text">Quora</span>
+              <span className="logo-text">InquireQuora</span>
             </div>
             <h1>Create your account</h1>
             <p>Join our community and start sharing knowledge</p>

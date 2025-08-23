@@ -35,7 +35,7 @@ function Login() {
           <div className="auth-header">
             <div className="logo">
               <div className="logo-icon">Q</div>
-              <span className="logo-text">Quora</span>
+              <span className="logo-text">InquireQuora</span>
             </div>
             <h1>Welcome back</h1>
             <p>Sign in to your account to continue</p>
