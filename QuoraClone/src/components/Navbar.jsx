@@ -50,7 +50,7 @@ function Navbar() {
       <div className="nav-container">
         <Link to="/" className="nav-logo">
           <div className="logo-icon">Q</div>
-          <span className="logo-text">InquireQuora</span>
+          <span className="logo-text">I.Quora</span>
         </Link>
 
         <form className="search-form" onSubmit={handleSearch}>
